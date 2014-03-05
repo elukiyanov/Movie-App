@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <section id="login">
+                            @Html.Partial("_LoginPartial")
+            </section>
+            <div class="content-wrapper">
+                <div class="branding">
+                        
+                    <div class="innerBranding">
+                        <div class="float-left">
+                            <p class="site-title"><a href="@Url.Action("Index","Home")"><img src="~/Images/logo.png"/></a></p>
+                        </div>
+                        <div class="sTitle">Movie App</div>
+                        <div class="float-right">
+                       
+                            <nav>
+                                <ul id="menu">
+                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                  <!--  <li>@Html.ActionLink("All Movies", "AllMovies", "Movie")</li>-->
+                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+              <div class="banner">
+              </div>
+        </header>
+
+
+
+
+        <div id="body">
+
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+
+
+
+        <footer>
+            <div class="footerX">
+                 <center>
+                     &copy; 2013-@DateTime.Now.Year - Evgeny Lukiyanov
+                 </center>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
