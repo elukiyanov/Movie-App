@@ -31,7 +31,9 @@ namespace MovieApp.Controllers
         public ActionResult Index(string btnClick)
         {
 
-          /*  if (btnClick == "Update Movies")
+
+          /*  
+             if (btnClick == "Update Movies")
             {
 
                 string urlAddress = "http://www.imdb.com/chart/top";
