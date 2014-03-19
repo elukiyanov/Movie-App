@@ -31,6 +31,19 @@ namespace MovieApp.Controllers
 
 
 
+        //
+        // POST: /Account/List
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult List()
+        {
+            //get users
+            using (var ctx = new UsersContext())
+            {
+                return View(ctx.UserProfiles.ToList());
+            }
+        }
+
 
         //
         // POST: /Account/Login
@@ -75,10 +88,7 @@ namespace MovieApp.Controllers
         {
             if (!WebSecurity.Initialized)
             {
-                //string conString = @"Data Source=MAN01-DY90FV1\SQLEXPRESS2012;   Initial Catalog= MoviesDB;   Integrated Security=True";
-                string conString = System.Configuration.ConfigurationManager.ConnectionStrings["MoviesAppConnection"].ToString();
-
-                WebSecurity.InitializeDatabaseConnection(conString, "Users", "ID", "UserName", autoCreateTables: true);
+                WebSecurity.InitializeDatabaseConnection("MoviesAppConnection", "Users", "ID", "UserName", autoCreateTables: true);
             }
             return View();
         }

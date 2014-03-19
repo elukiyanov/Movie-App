@@ -300,6 +300,7 @@
     <Content Include="Views\Movie\AddMovie.cshtml" />
     <Content Include="Views\Movie\Edit.cshtml" />
     <Content Include="Views\Movie\Delete.cshtml" />
+    <Content Include="Views\Account\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
