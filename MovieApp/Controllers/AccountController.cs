@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using MovieApp.Filters;
 using MovieApp.Models;
+using System.Data;
 
 namespace MovieApp.Controllers
 {
@@ -44,6 +45,32 @@ namespace MovieApp.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(UserProfile user)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var ctx = new UsersContext())
+                {
+                    ctx.Entry(user).State = EntityState.Modified;
+                    ctx.SaveChanges();
+                    return RedirectToAction("List");
+                }
+            }
+            else{
+            
+            }
+            // If we got this far, something failed, redisplay form
+            ModelState.AddModelError("", "There was an error updating the user");
+            return View(user);
+        }
 
         //
         // POST: /Account/Login
@@ -137,7 +164,7 @@ namespace MovieApp.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
